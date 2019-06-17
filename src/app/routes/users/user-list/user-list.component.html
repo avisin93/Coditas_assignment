@@ -1,0 +1,91 @@
+<!-- <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4">
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-sm-6">
+      <u>
+        <h4>User List</h4>
+      </u>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-sm-6 text-right">
+      <button class="btn btn-primary btn-sm ptr" [routerLink]="'/user-list/add'" type="button">
+        Add User</button>
+    </div>
+  </div>
+</div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class=" table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th [class.active]="order === 'firstname'" (click)="setOrder('firstname')">
+                    First Name <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+                  </th>
+                  <th [class.active]="order === 'lastname'" (click)="setOrder('lastname')">
+                    Last Name <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+                  </th>
+                  <th [class.active]="order === 'userName'" (click)="setOrder('userName')">
+                    Username <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                  </th>
+                  <th [class.active]="order === 'city'" (click)="setOrder('city')">
+                    City <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                  </th>
+                  <th [class.active]="order === 'department'" (click)="setOrder('department')">
+                    Department <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr >
+                  <td>
+                    <input type="text" class="form-control"  placeholder="Search" [(ngModel)]="searchStr.firstname">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control"  placeholder="Search" [(ngModel)]="searchStr.lastname">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control"  placeholder="Search" [(ngModel)]="searchStr.userName">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control"  placeholder="Search" [(ngModel)]="searchStr.city">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control"  placeholder="Search" [(ngModel)]="searchStr.department">
+                  </td>
+                </tr>
+                <tr
+                  *ngFor="let item of vendorList | paginate: { itemsPerPage: 4, currentPage: p } | orderBy: order : reverse: caseInsensitive | filter : searchStr">
+                  <td>{{item?.firstname}}</td>
+                  <td>{{item?.lastname}}</td>
+                  <td>{{item?.userName}}</td>
+                  <td>{{item?.city}}</td>
+                  <td>{{item?.department}}</td>
+                </tr>
+                <ng-container *ngIf="vendorList?.length < 1">
+                  <tr>
+                    <td colspan="5">
+                      <p class="text-danger text-center">No Records found</p>
+                    </td>
+                  </tr>
+                </ng-container>
+        
+              </tbody>
+            </table>
+        
+          </div>
+          <div class="custom-pagination" *ngIf="vendorList?.length > 0">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+ -->
+
+ dfgsfgdgf
