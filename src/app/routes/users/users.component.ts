@@ -36,6 +36,16 @@ export class UsersComponent implements OnInit {
       'id': 4,
       'text': 'Rank ↑'
     },
+  ];
+  repos = [
+    {
+      name: 'asdadads',
+      value: 'sdjhshalkjdjsalkd'
+    },
+    {
+      name: 'asdadads',
+      value: 'sdjhshalkjdjsalkd'
+    }
   ]
   pageLastRecord: any = 0;
   constructor(private _userListService: UserService, ) { }

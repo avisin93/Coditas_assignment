@@ -3,14 +3,24 @@
   
     }
     .navbar{
-        background-color: #125caa
+        background-color: #3d78b7;
+
+        .navigation {
+            display: flex;
+            width: 900px;
+
+            .navigation-item {
+                flex: 1 0 0;
+                display: flex;
+                position: relative;
+                .search-icon {
+                    position: absolute;
+                    right: 16px;
+                    top: 8px;
+                }
+            }
+        }
     }
-    // .sort-box{
-    //     padding-right: 40%;
-    // }
-    // .search-box{
-    //     padding-left: 15%;
-    // }
     .profile-image{
         border-radius: 50%;
         height: 100px;
@@ -18,8 +28,77 @@
     }
     .details-button {
         background-color: white;
-        border: solid 1px #007bff;
-        border-radius: 0;
-        color:#007bff;
+        border: solid 1.5px #3d78b7;
+        border-radius: 4px;
+        color: #3d78b7;
         width: 105px;
+        font-weight: bold;
     }
+
+
+.wrapper-users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 900px;
+    margin: 0 auto;
+    .results-header {
+        margin-top: 1.5rem!important;
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        
+        h6 {
+            font-weight: bold !important;
+        }
+    }
+    .user-card{
+        box-shadow: 1px 2px 8px -2px lightgrey;
+        border: none !important;
+        width: 100%;
+
+        .user-card-body {
+            border-bottom: 1px solid lightgray;
+        }
+
+        .user-full-name {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .profile-url {
+            font-size: 16px;
+        }
+
+        .user-repos {
+            .repo {
+                display: flex;
+                padding: 8px 0;
+                .repo-name {
+                    flex-basis: 1;
+                    flex-grow: 0;
+                    flex-shrink: 0;
+                    flex: 1 0 0;
+                    text-align: center;
+                }
+                .repo-technology {
+                    flex-basis: 1;
+                    flex-grow: 0;
+                    flex-shrink: 0;
+                    flex: 1 0 0;
+                    text-align: center;
+                }
+            }
+
+            .repo:nth-child(even) {
+                background-color: #f1f4f7;
+            }
+        }
+    }
+}
+
+.user-pagination {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

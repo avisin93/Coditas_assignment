@@ -1,70 +1,58 @@
-<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-    <ul class="navbar-nav">
-        <li class="nav-item sort-box">
+<nav class="navbar navbar-expand-sm">
+    <div class="navbar-nav navigation">
+        <div class="nav-item sort-box navigation-item">
             <select class="form-control" placeholder="Sort" [(ngModel)]='sortType' (change)='sortingChanged(sortType)'
                 name="sort">
-                <option disabled [value]='0'>Sort</option>
+                <option disabled [value]='0'>Sort by</option>
                 <option *ngFor="let item of sortArr; let i=index" [value]='item?.id'>{{item?.text}}</option>
             </select>
-        </li>
-        <li class="nav-item search-box ml-5">
+        </div>
+        <div class="nav-item search-box ml-5 navigation-item">
             <input class="form-control" (keyup)='getUserList();' [(ngModel)]='searchString' placeholder="Search"
                 type="text">
-        </li>
-    </ul>
+            <i class="search-icon">O</i>
+        </div>
+    </div>
 </nav>
 
-<div class="container" *ngIf='userList'>
-    <h6 class="mt-2">Total Results: {{totalItems}}</h6>
-    <div *ngFor="let item of userList; let i=index" class="card mt-4">
-        <div class="card-body">
+<div class="wrapper-users" *ngIf='userList'>
+    <div class="results-header">
+        <h6 class="mt-2">Total Results: {{totalItems}}</h6>
+    </div>
+    <div *ngFor="let item of userList; let i=index" class="card mt-4 user-card">
+        <div class="card-body user-card-body">
             <div class="row">
                 <div class="col-md-2 col-sm-2 col-lg-2">
                     <img class="profile-image" src="{{item?.avatar_url}}" alt="Avatar">
                 </div>
                 <div class="col-md-10 col-sm-10 col-lg-10">
 
-                    <h3>{{item?.id}}</h3>
-                    <h3>{{item?.login}}</h3>
+                    <div class="user-full-name col-md-10 col-sm-10 col-lg-10">{{item?.login}}</div>
+                    <!-- <div class="profile-url">{{item?.id}}</div> -->
                     <div class="col-md-12 col-sm-12 col-lg-12">
                         <div class="row">
                             <div class="col-md-10 col-sm-10 col-lg-10">
-                                <h6>Profile URL: {{item?.url}}</h6>
+                                <h6>Profile URL: <a href="{{item?.url}}">{{item?.url}}</a></h6>
                             </div>
                             <div class="col-md-2 col-sm-2 col-lg-2">
-                                <h6><button class="btn btn-light details-button">Details</button></h6>
+                                <h6><button (click)="item['show'] = !item['show'];" class="btn btn-light details-button">{{item['show'] ? 'Collapse' : 'Details'}}</button></h6>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <table class="table-striped table-responsive">
-            <tbody>
-                <tr>
-                    <td>asdads</td>
-                    <td>asdads</td>
-                    <td>asdads</td>
-                </tr>
-                <tr>
-                        <td>asdads</td>
-                        <td>asdads</td>
-                        <td>asdads</td>
-                    </tr>
-                    <tr>
-                            <td>asdads</td>
-                            <td>asdads</td>
-                            <td>asdads</td>
-                        </tr>
-            </tbody>
-        </table>
+        <div class="user-repos" *ngIf="item.show">
+            <div class="repo" *ngFor="let repo of repos">
+                <div class="repo-name">{{repo?.name}}</div>
+                <div class="repo-technology">{{repo?.value}}</div>
+            </div>
+        </div>
     </div>
 
-    <div class="row mt-2">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+    <div class="mt-2 user-pagination">
             <pagination class="pagination-sm " [(ngModel)]="page" [totalItems]="totalItems"
                 [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" (pageChanged)="pageChanged($event)">
             </pagination>
-        </div>
     </div>
 </div>
