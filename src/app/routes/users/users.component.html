@@ -8,13 +8,14 @@
             </select>
         </li>
         <li class="nav-item search-box ml-5">
-            <input class="form-control" (keyup) = 'getUserList();' [(ngModel)]='searchString' placeholder="Search" type="text">
+            <input class="form-control" (keyup)='getUserList();' [(ngModel)]='searchString' placeholder="Search"
+                type="text">
         </li>
     </ul>
 </nav>
 
-<div class="container" *ngIf = 'userList'>
-    <h6 class="mt-2">Total Results:</h6>
+<div class="container" *ngIf='userList'>
+    <h6 class="mt-2">Total Results: {{totalItems}}</h6>
     <div *ngFor="let item of userList; let i=index" class="card mt-4">
         <div class="card-body">
             <div class="row">
@@ -31,14 +32,34 @@
                                 <h6>Profile URL: {{item?.url}}</h6>
                             </div>
                             <div class="col-md-2 col-sm-2 col-lg-2">
-                                    <h6><button  class="btn btn-light details-button">Details</button></h6>
-                                </div>
+                                <h6><button class="btn btn-light details-button">Details</button></h6>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <table class="table-striped table-responsive">
+            <tbody>
+                <tr>
+                    <td>asdads</td>
+                    <td>asdads</td>
+                    <td>asdads</td>
+                </tr>
+                <tr>
+                        <td>asdads</td>
+                        <td>asdads</td>
+                        <td>asdads</td>
+                    </tr>
+                    <tr>
+                            <td>asdads</td>
+                            <td>asdads</td>
+                            <td>asdads</td>
+                        </tr>
+            </tbody>
+        </table>
     </div>
+
     <div class="row mt-2">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
             <pagination class="pagination-sm " [(ngModel)]="page" [totalItems]="totalItems"

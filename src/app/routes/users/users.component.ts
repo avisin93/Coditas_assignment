@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
   getUserList() {
     this._userListService.getUserDetails(this.getSearchQueryParam()).subscribe((response: any) => {
       this.userList = response.items;
-      this.totalItems = 200;
+      this.totalItems = response.total_count;
     });
   }
   getSearchQueryParam() {
