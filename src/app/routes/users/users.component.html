@@ -1,19 +1,19 @@
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
     <ul class="navbar-nav">
         <li class="nav-item sort-box">
-            <select class="form-control" placeholder="Sort" [(ngModel)] = 'sortType'
-             (change) = 'sortingChanged(sortType)' name="sort">
-                <option disabled  [value]= '0'>Sort</option>
+            <select class="form-control" placeholder="Sort" [(ngModel)]='sortType' (change)='sortingChanged(sortType)'
+                name="sort">
+                <option disabled [value]='0'>Sort</option>
                 <option *ngFor="let item of sortArr; let i=index" [value]='item?.id'>{{item?.text}}</option>
             </select>
         </li>
         <li class="nav-item search-box ml-5">
-            <input class="form-control" placeholder="Search" type="text">
+            <input class="form-control" (keyup) = 'getUserList();' [(ngModel)]='searchString' placeholder="Search" type="text">
         </li>
     </ul>
 </nav>
 
-<div class="container">
+<div class="container" *ngIf = 'userList'>
     <h6 class="mt-2">Total Results:</h6>
     <div *ngFor="let item of userList; let i=index" class="card mt-4">
         <div class="card-body">
@@ -22,9 +22,19 @@
                     <img class="profile-image" src="{{item?.avatar_url}}" alt="Avatar">
                 </div>
                 <div class="col-md-10 col-sm-10 col-lg-10">
-                        <h3>{{item?.id}}</h3>
+
+                    <h3>{{item?.id}}</h3>
                     <h3>{{item?.login}}</h3>
-                    <h6>Profile URL: {{item?.url}}</h6>
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-md-10 col-sm-10 col-lg-10">
+                                <h6>Profile URL: {{item?.url}}</h6>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-lg-2">
+                                    <h6><button  class="btn btn-light details-button">Details</button></h6>
+                                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

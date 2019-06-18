@@ -18,6 +18,7 @@ export class UsersComponent implements OnInit {
   currentPage: any = CustomListConfig.pageNumber;
   public maxSize: any = CustomListConfig.maxSize;
   sortType: any = 0;
+  searchString: any;
   sortArr: any = [
     {
       'id': 1,
@@ -36,27 +37,29 @@ export class UsersComponent implements OnInit {
       'text': 'Rank ↑'
     },
   ]
+  pageLastRecord: any = 0;
   constructor(private _userListService: UserService, ) { }
 
   ngOnInit() {
-    this.getUserList();
   }
 
   getUserList() {
     this._userListService.getUserDetails(this.getSearchQueryParam()).subscribe((response: any) => {
-      this.userList = response;
+      this.userList = response.items;
       this.totalItems = 200;
     });
   }
   getSearchQueryParam() {
     let params: HttpParams = new HttpParams();
-    params = params.append('since', '0');
+    params = params.append('q', this.searchString);
+    params = params.append('since', this.pageLastRecord.toString());
     params = params.append('page', this.currentPage.toString());
-    params = params.append('per_page', '3');
+    params = params.append('per_page', '5');
     return params;
   }
   public pageChanged(event: any): void {
     this.currentPage = event.page;
+    this.pageLastRecord = 5 * (this.currentPage - 1);
     this.getUserList();
   }
 

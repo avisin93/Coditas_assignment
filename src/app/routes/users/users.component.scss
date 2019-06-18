@@ -1,5 +1,9 @@
 .navbar-nav {
     margin:0 auto;
+  
+    }
+    .navbar{
+        background-color: #125caa
     }
     // .sort-box{
     //     padding-right: 40%;
@@ -11,4 +15,11 @@
         border-radius: 50%;
         height: 100px;
         width: 100px;
+    }
+    .details-button {
+        background-color: white;
+        border: solid 1px #007bff;
+        border-radius: 0;
+        color:#007bff;
+        width: 105px;
     }
