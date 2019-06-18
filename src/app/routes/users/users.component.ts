@@ -19,6 +19,7 @@ export class UsersComponent implements OnInit {
   public maxSize: any = CustomListConfig.maxSize;
   sortType: any = 0;
   searchString: any;
+  repoList: any;
   sortArr: any = [
     {
       'id': 1,
@@ -37,16 +38,6 @@ export class UsersComponent implements OnInit {
       'text': 'Rank ↑'
     },
   ];
-  repos = [
-    {
-      name: 'asdadads',
-      value: 'sdjhshalkjdjsalkd'
-    },
-    {
-      name: 'asdadads',
-      value: 'sdjhshalkjdjsalkd'
-    }
-  ]
   pageLastRecord: any = 0;
   constructor(private _userListService: UserService, ) { }
 
@@ -55,24 +46,44 @@ export class UsersComponent implements OnInit {
 
   getUserList() {
     this._userListService.getUserDetails(this.getSearchQueryParam()).subscribe((response: any) => {
-      this.userList = response.items;
-      this.totalItems = response.total_count;
+      if (response && response.items) {
+        this.userList = response.items;
+        this.totalItems = response.total_count;
+
+      } else {
+        this.userList = [];
+        this.totalItems = 0;
+      }
+    }, error => {
+      this.userList = [];
+      this.totalItems = 0;
     });
   }
   getSearchQueryParam() {
     let params: HttpParams = new HttpParams();
-    params = params.append('q', this.searchString);
-    params = params.append('since', this.pageLastRecord.toString());
+    if (this.searchString) {
+      params = params.append('q', this.searchString);
+
+    }
+
     params = params.append('page', this.currentPage.toString());
-    params = params.append('per_page', '5');
+    params = params.append('per_page', '4');
     return params;
   }
   public pageChanged(event: any): void {
     this.currentPage = event.page;
-    this.pageLastRecord = 5 * (this.currentPage - 1);
+    // this.pageLastRecord = 5 * (this.currentPage - 1);
     this.getUserList();
   }
 
+  getRepoList(username) {
+    let params: HttpParams = new HttpParams();
+    params = params.append('per_page', '5');
+    this._userListService.getRepoDetails(username, params).subscribe((response: any) => {
+      this.repoList = response;
+      console.log(this.repoList);
+    });
+  }
   sortingChanged(sortTypeId) {
     switch (sortTypeId) {
       case SORT_TYPE.atoz:

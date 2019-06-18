@@ -7,9 +7,10 @@ export class UserService {
 
     }
     getUserDetails(queryParams) {
-        // return this._http.get('https://api.github.com/users', { params: queryParams });
         return this._http.get('https://api.github.com/search/users', { params: queryParams });
 
     }
-
+    getRepoDetails(username, params) {
+        return this._http.get('https://api.github.com/users/' + username + '/repos', { params: params });
+    }
 }

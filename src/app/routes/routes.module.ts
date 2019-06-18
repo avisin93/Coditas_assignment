@@ -7,23 +7,21 @@ import { UserService } from './users/users.services';
 import { HttpClientModule } from '@angular/common/http';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
-import { FilterPipe } from '../filters/filter.pipe';
 import { CommonModule } from '@angular/common';
-
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
     imports: [
         RouterModule.forRoot(routes),
         HttpClientModule,
         PaginationModule.forRoot(),
         CommonModule,
-        FormsModule
+        FormsModule,
+        AngularFontAwesomeModule
     ],
-    declarations: [UsersComponent,
-        FilterPipe],
+    declarations: [UsersComponent],
     exports: [
         RouterModule,
-        FormsModule,
-        FilterPipe
+        FormsModule
     ],
     providers: [UserService]
 })

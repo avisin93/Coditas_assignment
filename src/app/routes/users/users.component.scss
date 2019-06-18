@@ -96,9 +96,13 @@
         }
     }
 }
+.hide-content{
+    display: none;
+  }
 
 .user-pagination {
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
+  

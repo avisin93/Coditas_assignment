@@ -10,13 +10,13 @@
         <div class="nav-item search-box ml-5 navigation-item">
             <input class="form-control" (keyup)='getUserList();' [(ngModel)]='searchString' placeholder="Search"
                 type="text">
-            <i class="search-icon">O</i>
+            <i class="search-icon fa fa-search" aria-hidden="true"></i>
         </div>
     </div>
 </nav>
 
 <div class="wrapper-users" *ngIf='userList'>
-    <div class="results-header">
+    <div [ngClass]="(userList.length == 0) ?'hide-content': 'user-pagination'">
         <h6 class="mt-2">Total Results: {{totalItems}}</h6>
     </div>
     <div *ngFor="let item of userList; let i=index" class="card mt-4 user-card">
@@ -35,7 +35,9 @@
                                 <h6>Profile URL: <a href="{{item?.url}}">{{item?.url}}</a></h6>
                             </div>
                             <div class="col-md-2 col-sm-2 col-lg-2">
-                                <h6><button (click)="item['show'] = !item['show'];" class="btn btn-light details-button">{{item['show'] ? 'Collapse' : 'Details'}}</button></h6>
+                                <h6><button (click)="item['show'] = !item['show'];getRepoList(item?.login)"
+                                        class="btn btn-light details-button">{{item['show'] ? 'Collapse' : 'Details'}}</button>
+                                </h6>
                             </div>
                         </div>
                     </div>
@@ -43,16 +45,16 @@
             </div>
         </div>
         <div class="user-repos" *ngIf="item.show">
-            <div class="repo" *ngFor="let repo of repos">
-                <div class="repo-name">{{repo?.name}}</div>
-                <div class="repo-technology">{{repo?.value}}</div>
+            <div class="repo" *ngFor="let repo of repoList">
+                <div class="repo-name">{{repo?.full_name ? repo?.full_name : '-'}}</div>
+                <div class="repo-technology">{{repo?.language ? repo?.language : '-'}}</div>
             </div>
         </div>
     </div>
 
-    <div class="mt-2 user-pagination">
-            <pagination class="pagination-sm " [(ngModel)]="page" [totalItems]="totalItems"
-                [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" (pageChanged)="pageChanged($event)">
-            </pagination>
+    <div class="mt-2" [ngClass]="(userList.length == 0) ?'hide-content': 'user-pagination'">
+        <pagination class="pagination-sm " [(ngModel)]="page" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage"
+            [maxSize]="maxSize" (pageChanged)="pageChanged($event)">
+        </pagination>
     </div>
 </div>
