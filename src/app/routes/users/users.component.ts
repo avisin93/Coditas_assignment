@@ -88,20 +88,22 @@ export class UsersComponent implements OnInit {
   }
 
   getRepoList(item) {
-    item['spinnerFlag'] = true;
-    let params: HttpParams = new HttpParams();
-    params = params.append('per_page', '5');
-    this._userListService.getRepoDetails(item.login, params).subscribe((response: any) => {
-      item['spinnerFlag'] = false;
-      if (response) {
-        item['repoList'] = response;
-      } else {
+    if (item.show) {
+      item['spinnerFlag'] = true;
+      let params: HttpParams = new HttpParams();
+      params = params.append('per_page', '5');
+      this._userListService.getRepoDetails(item.login, params).subscribe((response: any) => {
+        item['spinnerFlag'] = false;
+        if (response) {
+          item['repoList'] = response;
+        } else {
+          item['repoList'] = [];
+        }
+      }, error => {
+        item['spinnerFlag'] = false;
         item['repoList'] = [];
-      }
-    }, error => {
-      item['spinnerFlag'] = false;
-      item['repoList'] = [];
-    });
+      });
+    }
   }
   sortingChanged() {
     switch (this.sortType) {
