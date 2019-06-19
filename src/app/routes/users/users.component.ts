@@ -20,6 +20,7 @@ export class UsersComponent implements OnInit {
   sortType: any = 0;
   searchString: any;
   repoList: any;
+  showLoader: Boolean = false;
   sortArr: any = [
     {
       'id': 1,
@@ -45,8 +46,10 @@ export class UsersComponent implements OnInit {
   }
 
   getUserList() {
+    this.showLoader = true;
     if (this.searchString) {
       this._userListService.getUserDetails(this.getSearchQueryParam()).subscribe((response: any) => {
+        this.showLoader = false;
         if (response && response.items) {
           this.userList = response.items;
           this.totalItems = response.total_count;
@@ -57,10 +60,12 @@ export class UsersComponent implements OnInit {
           this.totalItems = 0;
         }
       }, error => {
+        this.showLoader = false;
         this.userList = [];
         this.totalItems = 0;
       });
     } else {
+      this.showLoader = false;
       this.userList = [];
       this.totalItems = 0;
     }

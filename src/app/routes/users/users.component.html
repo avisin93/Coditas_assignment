@@ -16,10 +16,11 @@
 </nav>
 
 <div class="wrapper-users" *ngIf='userList'>
-    <div [ngClass]="(userList.length == 0) ?'hide-content': 'user-pagination'">
+    <div *ngIf="showLoader" class="fa fa-spinner fa-spin loader mt-2"></div>
+    <div [ngClass]="(userList.length == 0 || showLoader) ?'hide-content': 'user-pagination'">
         <h6 class="mt-2 results-header">Total Results: {{totalItems}}</h6>
     </div>
-    <div *ngFor="let item of userList; let i=index" class="card mt-4 user-card">
+    <div *ngFor="let item of userList; let i=index" class="card mt-4 user-card" [ngClass]="showLoader ?'hide-content': 'user-card'">
         <div class="card-body user-card-body">
             <div class="row">
                 <div class="col-md-2 col-sm-2 col-lg-2">
@@ -35,8 +36,10 @@
                                 <h6>Profile URL: <a href="{{item?.url}}">{{item?.url}}</a></h6>
                             </div>
                             <div class="col-md-2 col-sm-2 col-lg-2">
-                                <h6><button [disabled] = 'item?.spinnerFlag' (click)="item['show'] = !item['show'];getRepoList(item)"
-                                        class="btn btn-light details-button"> <i *ngIf="item?.spinnerFlag" class="fa fa-spinner fa-spin mr-2"></i>{{item['show'] ? 'Collapse' : 'Details'}}</button>
+                                <h6><button [disabled]='item?.spinnerFlag'
+                                        (click)="item['show'] = !item['show'];getRepoList(item)"
+                                        class="btn btn-light details-button"> <i *ngIf="item?.spinnerFlag"
+                                            class="fa fa-spinner fa-spin mr-2"></i>{{item['show'] ? 'Collapse' : 'Details'}}</button>
                                 </h6>
                             </div>
                         </div>
@@ -52,7 +55,7 @@
         </div>
     </div>
 
-    <div class="mt-2" [ngClass]="(userList.length == 0) ?'hide-content': 'user-pagination'">
+    <div class="mt-2" [ngClass]="(userList.length == 0 || showLoader) ?'hide-content': 'user-pagination'">
         <pagination class="pagination-sm " [(ngModel)]="page" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage"
             [maxSize]="maxSize" (pageChanged)="pageChanged($event)">
         </pagination>

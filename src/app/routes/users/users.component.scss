@@ -105,4 +105,22 @@
     display: flex;
     justify-content: flex-end;
 }
+.loader {
+    display: table;
+    margin: auto;
+    text-align: center;
+    font-size: 40px;
+    color: #3d78b7;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
   
