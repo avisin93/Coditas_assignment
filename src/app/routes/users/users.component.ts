@@ -45,19 +45,25 @@ export class UsersComponent implements OnInit {
   }
 
   getUserList() {
-    this._userListService.getUserDetails(this.getSearchQueryParam()).subscribe((response: any) => {
-      if (response && response.items) {
-        this.userList = response.items;
-        this.totalItems = response.total_count;
+    if (this.searchString) {
+      this._userListService.getUserDetails(this.getSearchQueryParam()).subscribe((response: any) => {
+        if (response && response.items) {
+          this.userList = response.items;
+          this.totalItems = response.total_count;
+          this.sortingChanged();
 
-      } else {
+        } else {
+          this.userList = [];
+          this.totalItems = 0;
+        }
+      }, error => {
         this.userList = [];
         this.totalItems = 0;
-      }
-    }, error => {
+      });
+    } else {
       this.userList = [];
       this.totalItems = 0;
-    });
+    }
   }
   getSearchQueryParam() {
     let params: HttpParams = new HttpParams();
@@ -76,16 +82,24 @@ export class UsersComponent implements OnInit {
     this.getUserList();
   }
 
-  getRepoList(username) {
+  getRepoList(item) {
+    item['spinnerFlag'] = true;
     let params: HttpParams = new HttpParams();
     params = params.append('per_page', '5');
-    this._userListService.getRepoDetails(username, params).subscribe((response: any) => {
-      this.repoList = response;
-      console.log(this.repoList);
+    this._userListService.getRepoDetails(item.login, params).subscribe((response: any) => {
+      item['spinnerFlag'] = false;
+      if (response) {
+        item['repoList'] = response;
+      } else {
+        item['repoList'] = [];
+      }
+    }, error => {
+      item['spinnerFlag'] = false;
+      item['repoList'] = [];
     });
   }
-  sortingChanged(sortTypeId) {
-    switch (sortTypeId) {
+  sortingChanged() {
+    switch (this.sortType) {
       case SORT_TYPE.atoz:
         this.userList.sort((a, b) => a.login.localeCompare(b.login));
         break;

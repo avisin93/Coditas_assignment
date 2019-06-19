@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { RoutesModule } from './routes/routes.module';
-import { HeaderComponent } from './layout/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({

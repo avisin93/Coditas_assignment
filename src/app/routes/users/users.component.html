@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-sm">
     <div class="navbar-nav navigation">
         <div class="nav-item sort-box navigation-item">
-            <select class="form-control" placeholder="Sort" [(ngModel)]='sortType' (change)='sortingChanged(sortType)'
+            <select class="form-control" placeholder="Sort" [(ngModel)]='sortType' (change)='sortingChanged()'
                 name="sort">
                 <option disabled [value]='0'>Sort by</option>
                 <option *ngFor="let item of sortArr; let i=index" [value]='item?.id'>{{item?.text}}</option>
@@ -17,7 +17,7 @@
 
 <div class="wrapper-users" *ngIf='userList'>
     <div [ngClass]="(userList.length == 0) ?'hide-content': 'user-pagination'">
-        <h6 class="mt-2">Total Results: {{totalItems}}</h6>
+        <h6 class="mt-2 results-header">Total Results: {{totalItems}}</h6>
     </div>
     <div *ngFor="let item of userList; let i=index" class="card mt-4 user-card">
         <div class="card-body user-card-body">
@@ -35,8 +35,8 @@
                                 <h6>Profile URL: <a href="{{item?.url}}">{{item?.url}}</a></h6>
                             </div>
                             <div class="col-md-2 col-sm-2 col-lg-2">
-                                <h6><button (click)="item['show'] = !item['show'];getRepoList(item?.login)"
-                                        class="btn btn-light details-button">{{item['show'] ? 'Collapse' : 'Details'}}</button>
+                                <h6><button [disabled] = 'item?.spinnerFlag' (click)="item['show'] = !item['show'];getRepoList(item)"
+                                        class="btn btn-light details-button"> <i *ngIf="item?.spinnerFlag" class="fa fa-spinner fa-spin mr-2"></i>{{item['show'] ? 'Collapse' : 'Details'}}</button>
                                 </h6>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="user-repos" *ngIf="item.show">
-            <div class="repo" *ngFor="let repo of repoList">
+            <div class="repo" *ngFor="let repo of item?.repoList">
                 <div class="repo-name">{{repo?.full_name ? repo?.full_name : '-'}}</div>
                 <div class="repo-technology">{{repo?.language ? repo?.language : '-'}}</div>
             </div>
