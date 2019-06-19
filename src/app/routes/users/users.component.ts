@@ -45,6 +45,9 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Gets users list on search
+   */
   getUserList() {
     this.showLoader = true;
     if (this.searchString) {
@@ -70,6 +73,9 @@ export class UsersComponent implements OnInit {
       this.totalItems = 0;
     }
   }
+  /**
+   * Sets query params
+   */
   getSearchQueryParam() {
     let params: HttpParams = new HttpParams();
     if (this.searchString) {
@@ -86,7 +92,10 @@ export class UsersComponent implements OnInit {
     // this.pageLastRecord = 5 * (this.currentPage - 1);
     this.getUserList();
   }
-
+/**
+ * Gets repo details of specifies username
+ * @param item as Object
+ */
   getRepoList(item) {
     if (item.show) {
       item['spinnerFlag'] = true;
@@ -105,6 +114,9 @@ export class UsersComponent implements OnInit {
       });
     }
   }
+  /**
+   * Sorts record according to user selection
+   */
   sortingChanged() {
     switch (this.sortType) {
       case SORT_TYPE.atoz:
