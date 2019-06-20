@@ -66,6 +66,7 @@ export class UsersComponent implements OnInit {
         this.showLoader = false;
         this.userList = [];
         this.totalItems = 0;
+        alert('API rate limit exceeded for 113.193.31.229.Please try reloading the page');
       });
     } else {
       this.showLoader = false;
